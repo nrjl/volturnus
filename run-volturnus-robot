@@ -1,0 +1,49 @@
+#!/bin/bash
+
+source /opt/ros/indigo/setup.bash 
+source ~/catkin_ws/devel/setup.bash 
+
+my_pid=$$
+echo "My process ID is $my_pid"
+
+echo "Launching roscore..."
+roscore &
+pid=$!
+sleep 1s
+
+echo "Launching rosbridge ..."
+(roslaunch rosbridge_server rosbridge_websocket.launch &)
+pid="$pid $!"
+sleep 1s
+
+my_ip=$(ifconfig | grep "inet addr" | head -1 | cut -d ':' -f 2 | sed 's/[^0-9.]//g')
+echo "Your current IP address is: $my_ip"
+
+echo "Launching Unity sim..."
+/home/nick/Dropbox/vLBV\ sim/sim.x86_64 & 
+pid="$pid $!"
+sleep 12s
+
+echo "Launching publishers..."
+rosrun volturnus volturnus_tf_publisher2 &
+# rosrun volturnus odometry_publisher &
+pid="$pid $!"
+
+rosrun volturnus laser_tf_publisher &
+pid="$pid $!"
+
+rosrun volturnus laser_republisher &
+pid="$pid $!"
+
+sleep 3s
+echo "Launching rviz..."
+rosrun rviz rviz &
+pid="$pid $!"
+
+# echo "Launching gmapping..."
+# rosrun gmapping slam_gmapping scan:=/laserRepublished &
+# pid="$pid $!"
+
+trap "echo Killing all processes.; kill -s TERM $pid; exit" SIGINT SIGTERM
+
+sleep 24h
