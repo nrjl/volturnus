@@ -26,7 +26,9 @@ sleep 12s
 
 echo "Launching publishers..."
 rosrun volturnus volturnus_tf_publisher2 &
-# rosrun volturnus odometry_publisher &
+pid="$pid $!"
+
+rosrun volturnus odometry_publisher &
 pid="$pid $!"
 
 rosrun volturnus laser_tf_publisher &
@@ -36,13 +38,19 @@ rosrun volturnus laser_republisher &
 pid="$pid $!"
 
 sleep 3s
-echo "Launching rviz..."
-rosrun rviz rviz &
+
+echo "Launching gmapping..."
+rosrun gmapping slam_gmapping scan:=/laserRepublished &
 pid="$pid $!"
 
-# echo "Launching gmapping..."
-# rosrun gmapping slam_gmapping scan:=/laserRepublished &
-# pid="$pid $!"
+echo "Launching navigation stack..."
+roslaunch volturnus_2dnav move_base.launch &
+pid="$pid $!"
+
+sleep 3s
+echo "Launching rviz..."
+rosrun rviz rviz -d "$(rospack find volturnus)/video_rvizconfig.rviz" &
+pid="$pid $!"
 
 trap "echo Killing all processes.; kill -s TERM $pid; exit" SIGINT SIGTERM
 

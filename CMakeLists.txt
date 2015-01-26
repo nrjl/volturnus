@@ -8,6 +8,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   sensor_msgs
   geometry_msgs
+  nav_msgs
   tf
 )
 
@@ -19,6 +20,7 @@ catkin_package(CATKIN_DEPENDS
   std_msgs 
   sensor_msgs 
   geometry_msgs 
+  nav_msgs
   tf
 )
 
@@ -39,6 +41,10 @@ add_dependencies(volturnus_tf_publisher ${catkin_EXPORTED_TARGETS})
 add_executable(volturnus_tf_publisher2 src/volturnus_tf_publisher2.cpp)
 target_link_libraries(volturnus_tf_publisher2 ${catkin_LIBRARIES})
 add_dependencies(volturnus_tf_publisher2 ${catkin_EXPORTED_TARGETS})
+
+add_executable(odometry_publisher src/odometry_publisher.cpp)
+target_link_libraries(odometry_publisher ${catkin_LIBRARIES})
+add_dependencies(odometry_publisher ${catkin_EXPORTED_TARGETS})
 
 add_executable(laser_tf_publisher src/laser_tf_publisher.cpp)
 target_link_libraries(laser_tf_publisher ${catkin_LIBRARIES})
