@@ -42,6 +42,10 @@ add_executable(volturnus_tf_publisher2 src/volturnus_tf_publisher2.cpp)
 target_link_libraries(volturnus_tf_publisher2 ${catkin_LIBRARIES})
 add_dependencies(volturnus_tf_publisher2 ${catkin_EXPORTED_TARGETS})
 
+add_executable(volturnus_controller src/volturnus_controller.cpp)
+target_link_libraries(volturnus_controller ${catkin_LIBRARIES})
+add_dependencies(volturnus_controller ${catkin_EXPORTED_TARGETS})
+
 add_executable(odometry_publisher src/odometry_publisher.cpp)
 target_link_libraries(odometry_publisher ${catkin_LIBRARIES})
 add_dependencies(odometry_publisher ${catkin_EXPORTED_TARGETS})

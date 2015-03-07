@@ -1,0 +1,9 @@
+controller_gains:
+    linear:
+        p: 60.0
+        i: 0.01
+        d: 0.1
+    angular:
+        p: 40.0
+        i: 0.01
+        d: 0.1

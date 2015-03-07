@@ -1,6 +1,7 @@
 <launch>
-    <param name="robot_description" textfile="$(find volturnus)/urdf/volturnus.urdf"/>
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+    <!-- <param name="robot_description" textfile="$(find volturnus)/urdf/volturnus.urdf"/> -->
+    <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" /> -->
     <!-- <node name="gripper_joints" pkg="volturnus" type="" /> -->
+    <rosparam command="load" file="$(find volturnus)/volturnus_controller_params.yaml" ns="volturnus"/>
 </launch>
   
