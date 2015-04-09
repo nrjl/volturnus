@@ -52,9 +52,21 @@ echo "Launching rviz..."
 rosrun rviz rviz -d "$(rospack find volturnus)/video_rvizconfig.rviz" &
 pid="$pid $!"
 
+echo "Launching ps3 node..."
+rosrun joy joy_node &
+pid="$pid $!"
+
+echo "Launching ps3 controller..."
+rosparam set "axis_linear" 1
+rosparam set "axis_angular" 1
+rosparam set "scale_linear" 2.0
+rosparam set "scale_angular" 2.0
+rosrun volturnus ps3_controller &
+pid="$pid $!"
+
 echo "Launching volturnus controller..."
 rosparam load "$(rospack find volturnus)/volturnus_controller_params.yaml" volturnus
-rosrun volturnus volturnus_controller
+rosrun volturnus volturnus_controller &
 pid="$pid $!"
 
 trap "echo Killing all processes.; kill -s TERM $pid; exit" SIGINT SIGTERM
