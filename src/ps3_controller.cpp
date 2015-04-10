@@ -1,6 +1,7 @@
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/Joy.h>
+#include "ps3_button_defines.h"
 
 class TeleopVolturnus
 {
@@ -20,13 +21,9 @@ private:
 };
 
 
-TeleopVolturnus::TeleopVolturnus():
-  linear_(1),
-  angular_(0)
+TeleopVolturnus::TeleopVolturnus()
 {
 
-  //nh_.param("axis_linear", linear_, linear_);
-  //nh_.param("axis_angular", angular_, angular_);
   nh_.param("scale_angular", a_scale_, a_scale_);
   nh_.param("scale_linear", l_scale_, l_scale_);
 
@@ -39,8 +36,10 @@ TeleopVolturnus::TeleopVolturnus():
 void TeleopVolturnus::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
 {
   geometry_msgs::Twist vel;
-  vel.angular.z = a_scale_*joy->axes[angular_];
-  vel.linear.x = l_scale_*joy->axes[linear_];
+  vel.linear.x = l_scale_*joy->axes[PS3_AXIS_STICK_LEFT_UPWARDS];
+  vel.linear.y = l_scale_*joy->axes[PS3_AXIS_STICK_LEFT_LEFTWARDS];
+  vel.linear.z = l_scale_*joy->axes[PS3_AXIS_STICK_RIGHT_UPWARDS];  
+  vel.angular.z = a_scale_*joy->axes[PS3_AXIS_STICK_RIGHT_LEFTWARDS];
   vel_pub_.publish(vel);
 }
 
