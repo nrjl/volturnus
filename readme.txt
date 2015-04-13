@@ -75,9 +75,9 @@ sudo apt-get install socat
 mkdir ~/dev
 socat -x -v PTY,link=$HOME/dev/modem0 PTY,link=$HOME/dev/modem1
 
-// Copy the serial_params.
-// Set the "port" value in catkin_ws/src/volturnus_serial/serial_params_local.yaml
-// to your serial port (or use the virtual one at $HOME/dev/modem0)
+// Copy the serial_params_SAMPLE.yaml file to a new file called serial_params.yaml
+// and set the "port" value to your serial port (or use the virtual one at 
+// $HOME/dev/modem0 from above)
 rosparam load "$(rospack find volturnus_serial)/serial_params.yaml" serial_test
 
 // Run the ROS serial publisher

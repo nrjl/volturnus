@@ -20,7 +20,7 @@ my_ip=$(ifconfig | grep "inet addr" | head -1 | cut -d ':' -f 2 | sed 's/[^0-9.]
 echo "Your current IP address is: $my_ip"
 
 echo "Launching Unity sim..."
-/home/rdml/vLBV/unity_sim/nokeyboardTest/sim.x86_64 & 
+$HOME/vLBV/unity_sim/nokeyboardTest/sim.x86_64 & 
 pid="$pid $!"
 sleep 12s
 
@@ -68,6 +68,11 @@ echo "Launching volturnus controller..."
 rosparam load "$(rospack find volturnus)/volturnus_controller_params.yaml" volturnus
 rosrun volturnus volturnus_controller &
 pid="$pid $!"
+
+#echo "Launching serial joystick controller..."
+#rosparam load "$(rospack find volturnus_serial)/serial_params.yaml" serial_test
+#rosrun volturnus_serial serial_test &
+#pid="$pid $!"
 
 trap "echo Killing all processes.; kill -s TERM $pid; exit" SIGINT SIGTERM
 

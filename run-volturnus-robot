@@ -20,7 +20,7 @@ my_ip=$(ifconfig | grep "inet addr" | head -1 | cut -d ':' -f 2 | sed 's/[^0-9.]
 echo "Your current IP address is: $my_ip"
 
 echo "Launching Unity sim..."
-/home/nick/Dropbox/vLBV\ sim/nokeyboardTest/sim.x86_64 &
+$HOME/vLBV/unity_sim/nokeyboardTest/sim.x86_64 &
 pid="$pid $!"
 sleep 12s
 
