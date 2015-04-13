@@ -10,11 +10,14 @@ double linear_gains[3], angular_gains[3];
 void cmd_velCallback(const geometry_msgs::Twist& msg)
 {
     std_msgs::Int32MultiArray motorCommand;
-  
+
+    // MOTORS:  [0]: PORT AFT
+    //          [1]: PORT FORE  
+    //          [2]: PORT VERTICAL  
+    //          [3]: STARBOARD AFT  
+    //          [4]: STARBOARD FORE  
+    //          [5]: STARBOARD VERTICAL  
     motorCommand.data.assign(6,0);
-    //motorCommand.data.clear();
-    //ros::param::set("volturnus/test/linx", linear_gains[0]);
-    //std::cout << "Turn rate: " << msg.angular.z << std::endl;
     
 //    if (((msg.angular.z) > 0.5) || ((msg.angular.z) < -0.5))
 //    {
@@ -36,10 +39,13 @@ void cmd_velCallback(const geometry_msgs::Twist& msg)
     motorCommand.data[3] += int ((-msg.linear.x*linear_gains[0]));
     motorCommand.data[4] += int (( msg.linear.x*linear_gains[0]));
     
-    motorCommand.data[0] += int (( msg.linear.y*linear_gains[0])/2.0);
-    motorCommand.data[1] += int (( msg.linear.y*linear_gains[0])/2.0);
-    motorCommand.data[3] += int ((-msg.linear.y*linear_gains[0])/2.0);
-    motorCommand.data[4] += int ((-msg.linear.y*linear_gains[0])/2.0);    
+    motorCommand.data[0] += int (( msg.linear.y*linear_gains[0]));
+    motorCommand.data[1] += int (( msg.linear.y*linear_gains[0]));
+    motorCommand.data[3] += int ((-msg.linear.y*linear_gains[0]));
+    motorCommand.data[4] += int ((-msg.linear.y*linear_gains[0]));
+    
+    motorCommand.data[2] = int (( msg.linear.z*linear_gains[0]));
+    motorCommand.data[5] = int (( msg.linear.z*linear_gains[0]));   
     
     pub.publish(motorCommand);
 }
