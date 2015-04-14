@@ -57,7 +57,7 @@ rosrun joy joy_node &
 pid="$pid $!"
 
 echo "Launching ps3 teleop..."
-rosparam load "$(rospack find volturnus)/ps3_teleop_params.yaml" volturnus
+rosparam load "$(rospack find volturnus)/ps3_teleop_params.yaml" ps3_teleop
 rosrun volturnus ps3_teleop &
 pid="$pid $!"
 

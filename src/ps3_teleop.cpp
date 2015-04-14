@@ -30,6 +30,8 @@ TeleopVolturnus::TeleopVolturnus():
     angular_gain(1.0),
     linear_gain(1.0)
 {
+    ros::NodeHandle nh("~");
+    
     nh.param<double>("angular_gain", angular_gain, angular_gain);
     nh.param<double>("linear_gain", linear_gain, linear_gain);
     nh.param<int>("forward_axis", forward_axis, forward_axis);
