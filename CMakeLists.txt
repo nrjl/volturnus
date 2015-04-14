@@ -58,9 +58,9 @@ add_executable(laser_republisher src/laser_republisher.cpp)
 target_link_libraries(laser_republisher ${catkin_LIBRARIES})
 add_dependencies(laser_republisher ${catkin_EXPORTED_TARGETS})
 
-add_executable(ps3_controller src/ps3_controller.cpp)
-target_link_libraries(ps3_controller ${catkin_LIBRARIES})
-add_dependencies(ps3_controller ${catkin_EXPORTED_TARGETS})
+add_executable(ps3_teleop src/ps3_teleop.cpp)
+target_link_libraries(ps3_teleop ${catkin_LIBRARIES})
+add_dependencies(ps3_teleop ${catkin_EXPORTED_TARGETS})
 
 #############
 ## Install ##
