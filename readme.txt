@@ -21,10 +21,9 @@ ln -s $HOME/Dropbox/vLBV\ sim/ $HOME/vLBV/unity_sim
 // the OSU network to access nautilus.
 
 // Make catkin directories if you don't already have a catkin workspace.
-cd ~
-mkdir catkin_ws
-cd catkin_ws
-mkdir src
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/src
+catkin_init_workspace
 cd src
 
 git clone https://github.com/nrjl/volturnus.git OR
