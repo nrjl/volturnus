@@ -27,12 +27,12 @@ catkin_init_workspace
 cd src
 
 git clone https://github.com/nrjl/volturnus.git OR
-git clone ssh://user@10.214.152.144//home/nick/catkin_ws/src/volturnus
+git clone ssh://user@***MYIP***//home/nick/catkin_ws/src/volturnus
 
 git clone https://github.com/nrjl/volturnus_2dnav.git OR
-git clone ssh://user@10.214.152.144//home/nick/catkin_ws/src/volturnus_2dnav
+git clone ssh://user@***MYIP***//home/nick/catkin_ws/src/volturnus_2dnav
 
-git clone ssh://user@10.214.152.144//home/nick/catkin_ws/src/volturnus_serial
+git clone ssh://user@***MYIP***//home/nick/catkin_ws/src/volturnus_serial
 
 cd ~/catkin_ws
 catkin_make
